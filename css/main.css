@@ -29,14 +29,12 @@ img {
 .navbar {
     background-color: rgb(0, 0, 43);
     color: rgb(245, 245, 245);
-
     padding: 0 1rem;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     height: 150px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -50,6 +48,10 @@ img {
 
 .logo {
     height: 100%;
+}
+
+.logo-img {
+    width: 150px;
 }
 
 /* middle-section */
@@ -77,6 +79,11 @@ img {
     border-radius: 0 10px 10px 0;
 }
 
+.search-button:hover {
+    background-color: goldenrod;
+    transition: 1s;
+}
+
 .search-icon {
     height: 1.7rem;
     margin: 0 .2rem;
@@ -85,7 +92,14 @@ img {
 /* right-section */
 .right-section {
     width: 180px;
+    padding: .5rem 0 .5rem 1rem;
     display: flex;
+    border-radius: 20px;
+}
+
+.right-section:hover {
+    background-color: goldenrod;
+    transition: 1s;
 }
 
 .navbart-cart {
@@ -100,22 +114,20 @@ img {
 }
 
 .cart-text {
-  margin-top: 12px;
-  font-size: 1.2rem;
-  font-weight: 700;
+    margin-top: 12px;
+    font-size: 1.2rem;
+    font-weight: 700;
 }
 
 .cart-quantity {
-  color: rgb(0, 0, 43);
-  font-size: 16px;
-  font-weight: 700;
-
-  position: absolute;
-  top: 11px;
-  right: 15px;
-  
-  width: 26px;
-  text-align: center;
+    color: rgb(0, 0, 43);
+    font-size: 16px;
+    font-weight: 700;
+    position: absolute;
+    top: 11px;
+    right: 15px;
+    width: 26px;
+    text-align: center;
 }
 
 /* main */
@@ -167,7 +179,6 @@ main {
 
 .product-rating-stars {
     width: 100%;
-    
     color: goldenrod;
     margin-right: 6px;
 }
@@ -201,6 +212,7 @@ main {
 
 .button-primary:hover {
     background-color: rgb(189, 142, 23);
+    transition: .5s;
 }
 
 
@@ -222,6 +234,34 @@ footer {
 
 h3 {
     text-align: center;
-  font-size: 1.3rem;
-  padding: 1rem;
+    font-size: 1.3rem;
+    padding: 1rem;
+}
+
+/* media queries */
+@media (max-width: 480px) {
+    /* kis mobilok */
+}
+@media (max-width: 600px) {
+    /* mobil → phablet/tablet */
+}
+@media (max-width: 768px) {
+    /* táblagépek álló */
+    .middle-section {
+        visibility: collapse;
+        width: 10%;
+        margin: 0;
+    }
+}
+@media (max-width: 1024px) {
+    /* táblagépek fekvő / kisebb laptopok */
+}
+@media (max-width: 1280px) {
+      /* desktop */
+}
+@media (max-width: 1440px) {
+    /* nagyobb desktop */
+}
+@media (max-width: 1920px) {
+     /* FHD és felette */
 }

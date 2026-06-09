@@ -25,7 +25,7 @@ export const products = [
         name: "All The Letters I Should Have Sent",
         rating: {
             stars: 5.0,
-            count: 12
+            count: 112
         },
         priceForint: 5999
     },
@@ -65,7 +65,7 @@ export const products = [
         name: "Goal Planner",
         rating: {
             stars: 5.0,
-            count: 25
+            count: 252
         },
         priceForint: 4999
     },
@@ -85,7 +85,7 @@ export const products = [
         name: "How Innovation Works",
         rating: {
             stars: 5.0,
-            count: 11
+            count: 115
         },
         priceForint: 3999
     },
@@ -115,7 +115,7 @@ export const products = [
         name: "The Cronicles Of Narnia",
         rating: {
             stars: 4.0,
-            count: 4
+            count: 49
         },
         priceForint: 5999
     },
@@ -155,7 +155,7 @@ export const products = [
         name: "The Two Towers",
         rating: {
             stars: 5.0,
-            count: 32
+            count: 327
         },
         priceForint: 3999
     },
@@ -175,7 +175,7 @@ export const products = [
         name: "Wuthering Heights",
         rating: {
             stars: 4.0,
-            count: 13
+            count: 138
         },
         priceForint: 4999
     },
@@ -195,7 +195,7 @@ export const products = [
         name: "Zero To One",
         rating: {
             stars: 4.0,
-            count: 12
+            count: 120
         },
         priceForint: 5999
     }
