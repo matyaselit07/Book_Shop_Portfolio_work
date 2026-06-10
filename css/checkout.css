@@ -225,12 +225,6 @@ h2 {
 
 
 /* media queries */
-@media (max-width: 480px) {
-    /* kis mobilok */
-}
-@media (max-width: 600px) {
-    /* mobil → phablet/tablet */
-}
 @media (max-width: 768px) {
     /* táblagépek álló */
     .checkout-header {
@@ -242,9 +236,6 @@ h2 {
     .logo-img {
         visibility: hidden;
     }
-}
-@media (max-width: 1024px) {
-    /* táblagépek fekvő / kisebb laptopok */
 }
 @media (max-width: 1280px) {
     /* desktop */
@@ -261,10 +252,4 @@ h2 {
         padding: 1rem;
         margin: auto;
     }
-}
-@media (max-width: 1440px) {
-    /* nagyobb desktop */
-}
-@media (max-width: 1920px) {
-    /* FHD és felette */
 }

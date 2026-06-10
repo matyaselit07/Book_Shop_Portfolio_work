@@ -1,4 +1,5 @@
 import {products} from "../data/products.js"
+import { cart } from "../data/cart.js";
 
 let productsHTML = "";
 
@@ -54,6 +55,11 @@ products.forEach((product) => {
           <option value="10">10</option>
         </select>
       </div>
+      <div class="added-message js-added-message">
+        <i class="fa-solid fa-circle-check"></i>
+        Hozzáadva
+      </div>
+      
 
       <div class="product-spacer"></div>
 
@@ -66,4 +72,49 @@ products.forEach((product) => {
 });
 
 document.querySelector(".js-products-grid")
-    .innerHTML = productsHTML;
+  .innerHTML = productsHTML;
+
+document.querySelectorAll(".js-add-to-cart")
+  .forEach((button) => {
+    button.addEventListener("click", () => {
+      const productId = button.dataset.productId;
+
+      let matchingItem;
+
+      cart.forEach((item) => {
+        if (productId === item.productId) {
+          matchingItem = item;
+        } 
+      });
+
+      const container = button.closest('.product-container');
+      const quantitySelector = container.querySelector('select');
+      const quantity = Number(quantitySelector.value);
+
+      if (matchingItem) {
+        matchingItem.quantity += quantity;
+      } else {
+        cart.push({
+          productId: productId,
+          quantity: quantity
+        });
+      }
+
+      let cartQuantity = 0;
+
+      cart.forEach((item) => {
+        cartQuantity += item.quantity;
+      })
+      document.querySelector(".js-cart-quantity")
+        .innerHTML = cartQuantity;
+
+
+      const message = document.querySelector(".js-added-message");
+
+      message.classList.add("show");
+
+      setTimeout(() => {
+        message.classList.remove("show");
+      }, 2000);
+    });
+  });
