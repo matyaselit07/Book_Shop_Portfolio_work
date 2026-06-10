@@ -1,98 +1,151 @@
 import { products } from "../data/products.js";
-import { cart } from "../data/cart.js";
+import { cart, removeFromCart, updateDeliveryOption } from "../data/cart.js";
+import {deliveryOptions} from "../data/deliveryOptions.js"
 
-let cartSummaryHTML = '';
+const today = dayjs();
+const deliveryDate = today.add(7, "days");
+
+function renderOrderSummary() {
+
+    let cartSummaryHTML = '';
 
 
-cart.forEach((cartItem) => {
-    const productId = cartItem.productId;
+    cart.forEach((cartItem) => {
+        const productId = cartItem.productId;
 
-    let matchingProduct;
+        let matchingProduct;
 
-    products.forEach((product) => {
-        if (product.id === productId) {
-            matchingProduct = product;
-        };
-    });
+        products.forEach((product) => {
+            if (product.id === productId) {
+                matchingProduct = product;
+            };
+        });
 
-    
-    cartSummaryHTML += `
-    <div class="cart-item-container">
-        <div class="delivery-date">
-            Várható szállítási dátum: Kedd, Június 21
-        </div>
+        const deliveryOptionId = cartItem.deliveryOptionId;
 
-        <div class="cart-item-details-flex">
-        <img class="product-image"
-            src="${matchingProduct.image}">
+        let deliveryOption;
 
-        <div class="cart-item-details">
-            <div class="product-name">
-                ${matchingProduct.name}
+        deliveryOptions.forEach((option) => {
+            if (option.id === deliveryOptionId) {
+                deliveryOption = option;
+            }
+        });
+
+        const today = dayjs();
+        const deliveryDate = today.add(
+            deliveryOption.deliveryDays, "days"
+        );
+        const dateString = deliveryDate.locale("hu").format(
+            "dddd, MMMM D"
+        );
+
+
+        
+        cartSummaryHTML += `
+        <div class="cart-item-container js-cart-item-conatiner-${matchingProduct.id}">
+            <div class="delivery-date">
+                Várható szállítási dátum: 
+                    <p>${dateString}</p>
             </div>
-            <div class="product-price">
-                ${matchingProduct.priceForint} Ft
-            </div>
-            <div class="product-quantity">
-            <span>
-                Mennyiség: <span>${cartItem.quantity}</span>
-            </span>
-            <span class="delete-quantity-link link-primary">
-                Törlés
-            </span>
-            </div>
-        </div>
 
-        <div class="delivery-options">
-            <div class="delivery-options-title">
-                Válassz az alábbi kézbesítési lehetőségek közül:
-            </div>
-            <div class="delivery-option">
-            <input type="radio" checked
-                class="delivery-option-input"
-                name="delivery-option-${matchingProduct.id}">
-            <div>
-                <div class="delivery-option-date">
-                    Kedd, Június 21
+            <div class="cart-item-details-flex">
+            <img class="product-image"
+                src="${matchingProduct.image}">
+
+            <div class="cart-item-details">
+                <div class="product-name">
+                    ${matchingProduct.name}
                 </div>
-                <div class="delivery-option-price">
-                    699 Ft
+                <div class="product-price">
+                    ${matchingProduct.priceForint} Ft
                 </div>
-            </div>
-            </div>
-            <div class="delivery-option">
-            <input type="radio"
-                class="delivery-option-input"
-                name="delivery-option-${matchingProduct.id}">
-            <div>
-                <div class="delivery-option-date">
-                    Szerda, Június 15
-                </div>
-                <div class="delivery-option-price">
-                    1599 Ft
+                <div class="product-quantity">
+                <span>
+                    Mennyiség: <span>${cartItem.quantity}</span>
+                </span>
+                <span class="delete-quantity-link js-delete-link link-primary" data-product-id="${matchingProduct.id}">
+                    Törlés
+                </span>
                 </div>
             </div>
-            </div>
-            <div class="delivery-option">
-            <input type="radio"
-                class="delivery-option-input"
-                name="delivery-option-${matchingProduct.id}">
-            <div>
-                <div class="delivery-option-date">
-                    Hétfő, Június 13
+
+            <div class="delivery-options">
+                <div class="delivery-options-title">
+                    Válassz az alábbi kézbesítési lehetőségek közül:
                 </div>
-                <div class="delivery-option-price">
-                    2499 Ft
+                ${deliveryOptionsHTML(matchingProduct, cartItem)}
                 </div>
-            </div>
             </div>
         </div>
-        </div>
-    </div>
-    `;
-})
+        `;
+    })
 
-document.querySelector(".js-order-summary")
-    .innerHTML = cartSummaryHTML;
+    function deliveryOptionsHTML(matchingProduct, cartItem) {
+        let html = "";
 
 
+        deliveryOptions.forEach((deliveryOption)=> {
+
+            const today = dayjs();
+            const deliveryDate = today.add(
+                deliveryOption.deliveryDays, "days"
+            );
+            const dateString = deliveryDate.locale("hu").format(
+                "dddd, MMMM D"
+            );
+
+            const priceString = `${deliveryOption.priceForint} Ft`;
+            
+            const isChecked = deliveryOption.id === cartItem.deliveryOptionId;
+
+            html += `
+                <div class="delivery-option js-delivery-option" 
+                    data-product-id="${matchingProduct.id}" 
+                    data-delivery-option-id="${deliveryOption.id}">
+                <input type="radio"
+                    ${isChecked ? "checked" : ""}
+                    class="delivery-option-input"
+                    name="delivery-option-${matchingProduct.id}">
+                    <div>
+                        <div class="delivery-option-date">
+                            ${dateString}
+                        </div>
+                        <div class="delivery-option-price">
+                            ${priceString}
+                        </div>
+                    </div>
+                </div>
+            `
+        });
+
+        return html;
+    }
+
+
+
+    document.querySelector(".js-order-summary")
+        .innerHTML = cartSummaryHTML;
+
+
+    document.querySelectorAll(".js-delete-link")
+        .forEach((link) => {
+            link.addEventListener("click", () => {
+                const productId = link.dataset.productId;
+                removeFromCart(productId);
+
+                const container = document.querySelector(`.js-cart-item-conatiner-${productId}`);
+                container.remove();
+            })
+        });
+
+    document.querySelectorAll(".js-delivery-option")
+        .forEach((element) => {
+            element.addEventListener("click", () => {
+                const {productId, deliveryOptionId} = element.dataset;
+                updateDeliveryOption(productId, deliveryOptionId);
+                renderOrderSummary();
+            });
+        });
+};
+
+renderOrderSummary();
