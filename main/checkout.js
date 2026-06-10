@@ -1,10 +1,22 @@
 import { products } from "../data/products.js";
 import { cart } from "../data/cart.js";
 
-let cartSummaryCartHTML = '';
+let cartSummaryHTML = '';
 
 
-    cartSummaryCartHTML += `
+cart.forEach((cartItem) => {
+    const productId = cartItem.productId;
+
+    let matchingProduct;
+
+    products.forEach((product) => {
+        if (product.id === productId) {
+            matchingProduct = product;
+        };
+    });
+
+    
+    cartSummaryHTML += `
     <div class="cart-item-container">
         <div class="delivery-date">
             Várható szállítási dátum: Kedd, Június 21
@@ -12,18 +24,18 @@ let cartSummaryCartHTML = '';
 
         <div class="cart-item-details-flex">
         <img class="product-image"
-            src="images/products/5-ideas-from-global-diplomacy.jpg">
+            src="${matchingProduct.image}">
 
         <div class="cart-item-details">
             <div class="product-name">
-                5 Ideas From Global Diplomacy
+                ${matchingProduct.name}
             </div>
             <div class="product-price">
-                3999 Ft
+                ${matchingProduct.priceForint} Ft
             </div>
             <div class="product-quantity">
             <span>
-                Mennyiség: <span>2</span>
+                Mennyiség: <span>${cartItem.quantity}</span>
             </span>
             <span class="delete-quantity-link link-primary">
                 Törlés
@@ -38,7 +50,7 @@ let cartSummaryCartHTML = '';
             <div class="delivery-option">
             <input type="radio" checked
                 class="delivery-option-input"
-                name="delivery-option-1">
+                name="delivery-option-${matchingProduct.id}">
             <div>
                 <div class="delivery-option-date">
                     Kedd, Június 21
@@ -51,7 +63,7 @@ let cartSummaryCartHTML = '';
             <div class="delivery-option">
             <input type="radio"
                 class="delivery-option-input"
-                name="delivery-option-1">
+                name="delivery-option-${matchingProduct.id}">
             <div>
                 <div class="delivery-option-date">
                     Szerda, Június 15
@@ -64,7 +76,7 @@ let cartSummaryCartHTML = '';
             <div class="delivery-option">
             <input type="radio"
                 class="delivery-option-input"
-                name="delivery-option-1">
+                name="delivery-option-${matchingProduct.id}">
             <div>
                 <div class="delivery-option-date">
                     Hétfő, Június 13
@@ -78,7 +90,9 @@ let cartSummaryCartHTML = '';
         </div>
     </div>
     `;
+})
 
-document.querySelectorAll(".js-order-summary")
-    .innerhtm
+document.querySelector(".js-order-summary")
+    .innerHTML = cartSummaryHTML;
+
 

@@ -265,6 +265,10 @@ h3 {
 /* media queries */
 @media (max-width: 768px) {
     /* táblagépek álló */
+    .left-section {
+        visibility: collapse;
+        width: 10%;
+    }
     .middle-section {
         visibility: collapse;
         width: 10%;

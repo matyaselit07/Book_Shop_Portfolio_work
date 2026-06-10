@@ -4,7 +4,7 @@ export const products = [
         image: "images/products/5-ideas-from-global-diplomacy.jpg",
         name: "5 Ideas From Global Diplomacy",
         rating: {
-            stars: 4.0,
+            stars: 4.5,
             count: 72
         },
         priceForint: 3999
@@ -34,7 +34,7 @@ export const products = [
         image: "images/products/being-the-red-flag.jpg",
         name: "Being The Red Flag",
         rating: {
-            stars: 4.0,
+            stars: 4.5,
             count: 171
         },
         priceForint: 5999
@@ -44,7 +44,7 @@ export const products = [
         image: "images/products/book-of-psalms.jpg",
         name: "Book Of Psalms",
         rating: {
-            stars: 3.0,
+            stars: 3.5,
             count: 50
         },
         priceForint: 6999
@@ -104,7 +104,7 @@ export const products = [
         image: "images/products/milk-and-honey.jpg",
         name: "Milk And Honey",
         rating: {
-            stars: 4.0,
+            stars: 4.5,
             count: 21
         },
         priceForint: 5999
@@ -124,7 +124,7 @@ export const products = [
         image: "images/products/the-fine-print.jpg",
         name: "The Fine Print",
         rating: {
-            stars: 5.0,
+            stars: 3.0,
             count: 25
         },
         priceForint: 7999
