@@ -22,7 +22,7 @@ export function renderPaymentSummary() {
         </div>
 
         <div class="payment-summary-row">
-            <div>Termékek (3):</div>
+            <div>Termékek (${updateTotalQuantity()}):</div>
             <div class="payment-summary-money">${productPriceForints} Ft</div>
         </div>
 
@@ -43,3 +43,17 @@ export function renderPaymentSummary() {
     document.querySelector(".js-payment-summary")
         .innerHTML = paymentSummaryHTML;
 }
+
+function updateTotalQuantity() {
+    let totalQuantity = 0;
+
+    cart.forEach((item) => {
+        totalQuantity += item.quantity;
+    });
+
+    document.querySelector(".js-header-total-count")
+        .innerHTML = totalQuantity + " db Termék";
+
+    return totalQuantity;
+}
+

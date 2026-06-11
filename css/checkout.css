@@ -86,6 +86,10 @@ h2 {
     padding: 0 1rem;
 }
 
+.header-total-count {
+    font-size: 1.5rem;
+}
+
 /* checkout grid */
 .checkout-grid {
     display: flex;

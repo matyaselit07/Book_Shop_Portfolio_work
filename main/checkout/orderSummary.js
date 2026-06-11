@@ -74,12 +74,24 @@ export function renderOrderSummary() {
         deliveryOptions.forEach((deliveryOption)=> {
 
             const today = dayjs();
-            const deliveryDate = today.add(
+            let deliveryDate = today.add(
                 deliveryOption.deliveryDays, "days"
             );
+
+            
+            // packages can't be delivered on weekends
+            if (deliveryDate.day() === 6) {
+                deliveryDate = deliveryDate.add(2, "days");
+            } else if (deliveryDate.day() === 0) {
+                deliveryDate = deliveryDate.add(1, "days");
+            }
+
             const dateString = deliveryDate.locale("hu").format(
                 "dddd, MMMM D"
             );
+
+
+
 
             const priceString = `${deliveryOption.priceForint} Ft`;
             
