@@ -96,20 +96,25 @@ document.querySelectorAll(".js-add-to-cart")
   .forEach((button) => {
     button.addEventListener("click", () => {
       const productId = button.dataset.productId;
+      const productContainer = button.closest(".product-container");
+      const quantitySelect = productContainer.querySelector("select");
+      const quantity = quantitySelect ? quantitySelect.value : 1;
 
-      addToCart(productId);
+      addToCart(productId, quantity);
       updateCartQuantity();
       
       
 
 
-      const message = document.querySelector(".js-added-message");
+      const message = productContainer.querySelector(".js-added-message");
 
-      message.classList.add("show");
+      if (message) {
+        message.classList.add("show");
 
       setTimeout(() => {
         message.classList.remove("show");
       }, 2000);
+    }
     });
   });
 
