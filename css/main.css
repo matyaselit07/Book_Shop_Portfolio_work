@@ -161,6 +161,11 @@ main {
     align-items: center;
 }
 
+/* if no searches */
+.no-results {
+    height: 70vw;
+}
+
 .product-container {
     display: flex;
     width: 20%;
@@ -272,5 +277,8 @@ h3 {
         visibility: collapse;
         width: 10%;
         margin: 0;
+    }
+    .no-results {
+        padding: 2rem 0;
     }
 }

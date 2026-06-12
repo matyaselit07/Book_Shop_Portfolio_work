@@ -72,7 +72,7 @@ function matchesSearch(product, searchText) {
 
 function renderProducts(productList) {
   if (!Array.isArray(productList) || productList.length === 0) {
-    productsGrid.innerHTML = `<p class="no-results">Nincs találat.</p>`;
+    productsGrid.innerHTML = `<p class="no-results">Nincs a keresésednek megfelelő találat.</p>`;
     return;
   }
 
