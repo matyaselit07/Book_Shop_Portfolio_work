@@ -1,9 +1,9 @@
 ## Documentation
 
-Responsive Bootstrap 5 product landing page for a fictional fishing shop.
+This project demonstrates core and practical front-end JavaScript skills, focusing on dynamic content handling, user interaction, and real-time UI updates.
 
 ## Live Demo
-- [https://matyaselit07.github.io/Fishing_shop_Portfolio_work/]
+- [https://matyaselit07.github.io/Book_Shop_Portfolio_work/]
 
 # Pictures are from Unsplash
 - [https://unsplash.com/s/photos/book-cover]
@@ -23,6 +23,12 @@ Responsive Bootstrap 5 product landing page for a fictional fishing shop.
 
 ## Main functions
 
-Bootstrap-based responsive product website for a fictional fishing shop. The project includes a navigation bar, carousel, pricing section, product cards and contact section.
+The project showcases:
 
-![Screenshot](/assets/fishing_shop_screenshot.png)
+- Real-time search and filtering
+- Dynamic DOM rendering
+- Event-driven programming
+- Conditional UI logic
+- Practical use of array methods
+
+![Screenshot](/images/book_shop_screenshot.png)
