@@ -30,7 +30,7 @@ export function renderOrderSummary() {
 
         
         cartSummaryHTML += `
-        <div class="cart-item-container js-cart-item-conatiner-${matchingProduct.id}">
+        <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
             <div class="delivery-date">
                 Várható szállítási dátum: 
                     <p>${dateString}</p>
@@ -133,7 +133,7 @@ export function renderOrderSummary() {
                 const productId = link.dataset.productId;
                 removeFromCart(productId);
 
-                const container = document.querySelector(`.js-cart-item-conatiner-${productId}`);
+                const container = document.querySelector(`.js-cart-item-container-${productId}`);
                 container.remove();
 
                 renderPaymentSummary();
