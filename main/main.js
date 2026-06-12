@@ -89,9 +89,6 @@ function updateCartQuantity() {
     .innerHTML = cartQuantity;
 }
 
-
-
-
 document.querySelectorAll(".js-add-to-cart")
   .forEach((button) => {
     button.addEventListener("click", () => {
@@ -117,5 +114,13 @@ document.querySelectorAll(".js-add-to-cart")
     }
     });
   });
+
+document.querySelector(".js-search-bar")
+  .addEventListener("input", (text) => {
+    let searchText = text.target.value;
+    console.log(searchText);
+  })
+
+
 
 updateCartQuantity();

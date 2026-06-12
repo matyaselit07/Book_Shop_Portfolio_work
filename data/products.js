@@ -10,6 +10,9 @@ export function getProduct(productId) {
     return matchingProduct;
 }
 
+// diplomácia, politikai, probléma-megoldás, önfejlesztés, vallás, üzleti, produktivitás, innováció, stresszkezelés, romantikus
+// fantázia, kaland, filozófia, pénzügy, klasszikus
+
 export const products = [
     {
         id: "01",
@@ -19,7 +22,12 @@ export const products = [
             stars: 4.5,
             count: 72
         },
-        priceForint: 3999
+        priceForint: 3999,
+        keywords: [
+            "diplomácia",
+            "politikai",
+            "probléma-megoldás"
+        ]
     },
     {
         id: "02",
@@ -29,7 +37,10 @@ export const products = [
             stars: 5.0,
             count: 41
         },
-        priceForint: 4999
+        priceForint: 4999,
+        keywords: [
+            "önfejlesztés"
+        ]
     },
     {
         id: "03",
@@ -39,7 +50,11 @@ export const products = [
             stars: 5.0,
             count: 112
         },
-        priceForint: 5999
+        priceForint: 5999,
+        keywords: [
+            "történet-mesélés",
+            "önfejlesztés"
+        ]
     },
     {
         id: "04",
@@ -49,7 +64,10 @@ export const products = [
             stars: 4.5,
             count: 171
         },
-        priceForint: 5999
+        priceForint: 5999,
+        keywords: [
+            "önfejlesztés"
+        ]
     },
     {
         id: "05",
@@ -59,7 +77,10 @@ export const products = [
             stars: 3.5,
             count: 50
         },
-        priceForint: 6999
+        priceForint: 6999,
+        keywords: [
+            "vallás"
+        ]
     },
     {
         id: "06",
@@ -69,7 +90,12 @@ export const products = [
             stars: 4.0,
             count: 112
         },
-        priceForint: 6999
+        priceForint: 6999,
+        keywords: [
+            "önfejlesztés",
+            "üzleti",
+            "pénzügy"
+        ]
     },
     {
         id: "07",
@@ -79,7 +105,11 @@ export const products = [
             stars: 5.0,
             count: 252
         },
-        priceForint: 4999
+        priceForint: 4999,
+        keywords: [
+            "önfejlesztés",
+            "produktivitás"
+        ]
     },
     {
         id: "08",
@@ -89,7 +119,11 @@ export const products = [
             stars: 5.0,
             count: 12
         },
-        priceForint: 4999
+        priceForint: 4999,
+        keywords: [
+            "önismeret",
+            "önfejlesztés"
+        ]
     },
     {
         id: "09",
@@ -99,7 +133,11 @@ export const products = [
             stars: 5.0,
             count: 115
         },
-        priceForint: 3999
+        priceForint: 3999,
+        keywords: [
+            "innováció",
+            "önfejlesztés"
+        ]
     },
     {
         id: "10",
@@ -109,7 +147,11 @@ export const products = [
             stars: 4.0,
             count: 38
         },
-        priceForint: 5999
+        priceForint: 5999,
+        keywords: [
+            "önfejlesztés",
+            "stresszkezelés"
+        ]
     },
     {
         id: "11",
@@ -119,7 +161,11 @@ export const products = [
             stars: 4.5,
             count: 21
         },
-        priceForint: 5999
+        priceForint: 5999,
+        keywords: [
+            "romantikus",
+            "önfejlesztés"
+        ]
     },
     {
         id: "12",
@@ -129,7 +175,12 @@ export const products = [
             stars: 4.0,
             count: 49
         },
-        priceForint: 5999
+        priceForint: 5999,
+        keywords: [
+            "klasszikus",
+            "fantázia",
+            "kaland"
+        ]
     },
     {
         id: "13",
@@ -139,27 +190,40 @@ export const products = [
             stars: 3.0,
             count: 25
         },
-        priceForint: 7999
+        priceForint: 7999,
+        keywords: [
+            "romantikus",
+            "üzleti",
+            "dráma"
+        ]
     },
     {
         id: "14",
         image: "images/products/the-picture-of-dorian-grey.jpg",
         name: "The Picture Of Dorian Grey",
         rating: {
-            stars: 5.0,
+            stars: 4.5,
             count: 16
         },
-        priceForint: 7999
+        priceForint: 7999,
+        keywords: [
+            "dráma",
+            "filozófia"
+        ]
     },
     {
         id: "15",
         image: "images/products/the-psychology-of-money.jpg",
         name: "The Psychology Of Money",
         rating: {
-            stars: 3.0,
+            stars: 5.0,
             count: 12
         },
-        priceForint: 3999
+        priceForint: 3999,
+        keywords: [
+            "önfejlesztés",
+            "pénzügy"
+        ]
     },
     {
         id: "16",
@@ -169,17 +233,26 @@ export const products = [
             stars: 5.0,
             count: 327
         },
-        priceForint: 3999
+        priceForint: 3999,
+        keywords: [
+            "klasszikus",
+            "fantázia",
+            "kaland"
+        ]
     },
     {
         id: "17",
         image: "images/products/twisted-love.jpg",
         name: "Twisted Love",
         rating: {
-            stars: 5.0,
+            stars: 3.5,
             count: 11
         },
-        priceForint: 5999
+        priceForint: 5999,
+        keywords: [
+            "romantikus",
+            "dráma"
+        ]
     },
     {
         id: "18",
@@ -189,7 +262,11 @@ export const products = [
             stars: 4.0,
             count: 138
         },
-        priceForint: 4999
+        priceForint: 4999,
+        keywords: [
+            "romantikus",
+            "dráma"
+        ]
     },
     {
         id: "19",
@@ -199,7 +276,11 @@ export const products = [
             stars: 5.0,
             count: 30
         },
-        priceForint: 4999
+        priceForint: 4999,
+        keywords: [
+            "stresszkezelés",
+            "önfejlesztés"
+        ]
     },
     {
         id: "20",
@@ -209,6 +290,11 @@ export const products = [
             stars: 4.0,
             count: 120
         },
-        priceForint: 5999
+        priceForint: 5999,
+        keywords: [
+            "innováció",
+            "önfejlesztés",
+            "üzleti"
+        ]
     }
 ]
