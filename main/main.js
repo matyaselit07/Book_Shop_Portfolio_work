@@ -1,4 +1,4 @@
-﻿import { products } from "../data/products.js"
+﻿import { products } from "../data/products.js";
 import { cart, addToCart } from "../data/cart.js";
 
 const productsGrid = document.querySelector(".js-products-grid");
@@ -6,7 +6,7 @@ const searchBar = document.querySelector(".js-search-bar");
 const searchButton = document.querySelector(".search-button");
 
 function getStarsHTML(rating) {
-  let starsHTML = '';
+  let starsHTML = "";
 
   for (let i = 1; i <= 5; i++) {
     if (i <= Math.floor(rating)) {
@@ -64,7 +64,7 @@ function matchesSearch(product, searchText) {
   const normalized = searchText.trim().toLowerCase();
   const nameMatches = product.name.toLowerCase().includes(normalized);
   const keywordMatches = product.keywords.some((keyword) =>
-    keyword.toLowerCase().includes(normalized)
+    keyword.toLowerCase().includes(normalized),
   );
 
   return nameMatches || keywordMatches;
@@ -134,7 +134,9 @@ function renderProducts(productList) {
 }
 
 function filterProducts(searchText) {
-  renderProducts(products.filter((product) => matchesSearch(product, searchText)));
+  renderProducts(
+    products.filter((product) => matchesSearch(product, searchText)),
+  );
 }
 
 if (searchBar) {

@@ -2,64 +2,63 @@ const savedCart = localStorage.getItem("cart");
 export let cart = savedCart ? JSON.parse(savedCart) : [];
 
 function saveToStorage() {
-    if (!Array.isArray(cart)) {
-        cart = [];
-    }
-    localStorage.setItem("cart", JSON.stringify(cart));
+  if (!Array.isArray(cart)) {
+    cart = [];
+  }
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
 
 export function addToCart(productId, quantity = 1) {
-    quantity = Number(quantity);
-    if (Number.isNaN(quantity) || quantity < 1) {
-        quantity = 1;
+  quantity = Number(quantity);
+  if (Number.isNaN(quantity) || quantity < 1) {
+    quantity = 1;
+  }
+
+  let matchingItem;
+
+  cart.forEach((cartItem) => {
+    if (productId === cartItem.productId) {
+      matchingItem = cartItem;
     }
+  });
 
-    let matchingItem;
-
-    cart.forEach((cartItem) => {
-      if (productId === cartItem.productId) {
-        matchingItem = cartItem;
-      }
+  if (matchingItem) {
+    matchingItem.quantity += quantity;
+  } else {
+    cart.push({
+      productId: productId,
+      quantity,
+      deliveryOptionId: "1",
     });
+  }
 
-    if (matchingItem) {
-        matchingItem.quantity += quantity;
-    } else {
-        cart.push({
-            productId: productId,
-            quantity,
-            deliveryOptionId: "1"
-        });
-    }
-
-    saveToStorage();
+  saveToStorage();
 }
 
 export function removeFromCart(productId) {
-    const newCart = [];
+  const newCart = [];
 
-    cart.forEach((cartItem) => {
-        if (cartItem.productId !== productId) {
-            newCart.push(cartItem);
-        }
-    });
+  cart.forEach((cartItem) => {
+    if (cartItem.productId !== productId) {
+      newCart.push(cartItem);
+    }
+  });
 
-    cart = newCart;
+  cart = newCart;
 
-    saveToStorage();
+  saveToStorage();
 }
 
 export function updateDeliveryOption(productId, deliveryOptionId) {
-    let matchingItem;
+  let matchingItem;
 
-    cart.forEach((cartItem) => {
-      if (productId === cartItem.productId) {
-        matchingItem = cartItem;
-      } 
-    });
+  cart.forEach((cartItem) => {
+    if (productId === cartItem.productId) {
+      matchingItem = cartItem;
+    }
+  });
 
-    matchingItem.deliveryOptionId = deliveryOptionId;
+  matchingItem.deliveryOptionId = deliveryOptionId;
 
-    saveToStorage();
-
+  saveToStorage();
 }

@@ -1,35 +1,28 @@
 import { products, getProduct } from "../../data/products.js";
 import { cart, removeFromCart, updateDeliveryOption } from "../../data/cart.js";
-import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
+import {
+  deliveryOptions,
+  getDeliveryOption,
+} from "../../data/deliveryOptions.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
 
-
 export function renderOrderSummary() {
-    let cartSummaryHTML = '';
+  let cartSummaryHTML = "";
 
-    
+  cart.forEach((cartItem) => {
+    const productId = cartItem.productId;
 
-    cart.forEach((cartItem) => {
-        const productId = cartItem.productId;
+    const matchingProduct = getProduct(productId);
 
-        const matchingProduct = getProduct(productId);
+    const deliveryOptionId = cartItem.deliveryOptionId;
 
-        const deliveryOptionId = cartItem.deliveryOptionId;
+    const deliveryOption = getDeliveryOption(deliveryOptionId);
 
-        const deliveryOption = getDeliveryOption(deliveryOptionId);
+    const today = dayjs();
+    const deliveryDate = today.add(deliveryOption.deliveryDays, "days");
+    const dateString = deliveryDate.locale("hu").format("dddd, MMMM D");
 
-
-        const today = dayjs();
-        const deliveryDate = today.add(
-            deliveryOption.deliveryDays, "days"
-        );
-        const dateString = deliveryDate.locale("hu").format(
-            "dddd, MMMM D"
-        );
-
-
-        
-        cartSummaryHTML += `
+    cartSummaryHTML += `
         <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
             <div class="delivery-date">
                 Várható szállítási dátum: 
@@ -66,39 +59,29 @@ export function renderOrderSummary() {
             </div>
         </div>
         `;
-    })
+  });
 
-    function deliveryOptionsHTML(matchingProduct, cartItem) {
-        let html = "";
+  function deliveryOptionsHTML(matchingProduct, cartItem) {
+    let html = "";
 
+    deliveryOptions.forEach((deliveryOption) => {
+      const today = dayjs();
+      let deliveryDate = today.add(deliveryOption.deliveryDays, "days");
 
-        deliveryOptions.forEach((deliveryOption)=> {
+      // packages can't be delivered on weekends
+      if (deliveryDate.day() === 6) {
+        deliveryDate = deliveryDate.add(2, "days");
+      } else if (deliveryDate.day() === 0) {
+        deliveryDate = deliveryDate.add(1, "days");
+      }
 
-            const today = dayjs();
-            let deliveryDate = today.add(
-                deliveryOption.deliveryDays, "days"
-            );
+      const dateString = deliveryDate.locale("hu").format("dddd, MMMM D");
 
-            
-            // packages can't be delivered on weekends
-            if (deliveryDate.day() === 6) {
-                deliveryDate = deliveryDate.add(2, "days");
-            } else if (deliveryDate.day() === 0) {
-                deliveryDate = deliveryDate.add(1, "days");
-            }
+      const priceString = `${deliveryOption.priceForint} Ft`;
 
-            const dateString = deliveryDate.locale("hu").format(
-                "dddd, MMMM D"
-            );
+      const isChecked = deliveryOption.id === cartItem.deliveryOptionId;
 
-
-
-
-            const priceString = `${deliveryOption.priceForint} Ft`;
-            
-            const isChecked = deliveryOption.id === cartItem.deliveryOptionId;
-
-            html += `
+      html += `
                 <div class="delivery-option js-delivery-option" 
                     data-product-id="${matchingProduct.id}" 
                     data-delivery-option-id="${deliveryOption.id}">
@@ -115,41 +98,37 @@ export function renderOrderSummary() {
                         </div>
                     </div>
                 </div>
-            `
-        });
+            `;
+    });
 
-        return html;
-    }
+    return html;
+  }
 
+  document.querySelector(".js-order-summary").innerHTML = cartSummaryHTML;
 
+  document.querySelectorAll(".js-delete-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      const productId = link.dataset.productId;
+      removeFromCart(productId);
 
-    document.querySelector(".js-order-summary")
-        .innerHTML = cartSummaryHTML;
+      const container = document.querySelector(
+        `.js-cart-item-container-${productId}`,
+      );
+      container.remove();
 
+      renderPaymentSummary();
+    });
+  });
 
-    document.querySelectorAll(".js-delete-link")
-        .forEach((link) => {
-            link.addEventListener("click", () => {
-                const productId = link.dataset.productId;
-                removeFromCart(productId);
+  document.querySelectorAll(".js-delivery-option").forEach((element) => {
+    element.addEventListener("click", () => {
+      const { productId, deliveryOptionId } = element.dataset;
+      updateDeliveryOption(productId, deliveryOptionId);
 
-                const container = document.querySelector(`.js-cart-item-container-${productId}`);
-                container.remove();
-
-                renderPaymentSummary();
-            })
-        });
-
-    document.querySelectorAll(".js-delivery-option")
-        .forEach((element) => {
-            element.addEventListener("click", () => {
-                const {productId, deliveryOptionId} = element.dataset;
-                updateDeliveryOption(productId, deliveryOptionId);
-
-                renderOrderSummary();
-                renderPaymentSummary();
-            });
-        });
-};
+      renderOrderSummary();
+      renderPaymentSummary();
+    });
+  });
+}
 
 renderOrderSummary();
